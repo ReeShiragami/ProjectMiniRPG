@@ -92,7 +92,7 @@ Penyihir : Kamu mungkin bisa membunuhhku. Tapi Raja Iblis akan menghabisimu sebe
 Jack : (Memenggal Kepalanya)
 =============================================== 
 
-Jack memenggal kepala penyihir tersebut. Sepersekian detik kemudian jasad sang penyihir menjadi asap hitam. Perlahan menghilang dengan sendirinya. Meninggalkan sebuah liontin dengan batu berwarna biru di tengahnya. Jack mengambilnya. 
+Jack memenggal kepala penyihir tersebut. Sepersekian detik kemudian jasad sang penyihir menjadi asap hitam. Perlahan menghilang dengan sendirinya. Meninggalkan sebuah liontin dengan batu berwarna hijau di tengahnya. Jack mengambilnya. 
 
 =============================================== 
 Jack : Sebuah jimat? Sebaiknya kuambil.
@@ -160,12 +160,34 @@ Fuafua : Hai, Ayah.
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Arsitektur : 
 Seperti Turn-Based pada umumnya. 
 Satu giliran dianggap satu turns. Pemain akan mendapatkan giliran pertama untuk menyerang.   
 Ada pilihan untuk mengeluarkan Skill, Basic Attack, dan Dodge.
 Stats dasar meliputi HP, Defense, dan ATK. 
+
+Rancangan Arsitektur
+rpg/
+ ├─ model/
+ │   ├─ Character (abstract)  ← hp, def, atk, effects, endRound(), takeDamage(), heal()
+ │   ├─ Player
+ │   ├─ Enemy                 ← daftar Action + EnemyBehavior (data, bukan subclass per musuh)
+ │   └─ Boss, BossPhase (PhaseOne, PhaseTwo)
+ ├─ action/
+ │   ├─ Action (interface), BasicAttack, Dodge
+ │   ├─ ClawAttack (peluang Bleed), FlameAttack (peluang Burn)
+ │   └─ Skill (abstract) → SayaAkanLawan, SelfRegen
+ ├─ effect/
+ │   ├─ StatusEffect (abstract) → AtkBuff, Regen
+ │   └─ DamageOverTime (abstract) → Burn, Bleed
+ ├─ item/       Item (abstract) → ZirahBesiRingan, LiontinHijau, RunePahlawan
+ ├─ ai/         EnemyBehavior (interface) → AlwaysAttack, RegenChance(0.4)
+ ├─ battle/     Battle, DamageFormula (interface) → FlatSubtraction,
+ │              ActionChooser, BattleLog, BalanceSimulator
+ ├─ story/      Scene (interface) → DialogueScene, BattleScene, RewardScene, EndingScene
+ └─ Main.java
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -183,35 +205,37 @@ Build Character :
 
     Sang Penjaga
     HP : 200 
-    Def : 150 
-    Attack : 50 
+    Def : 60
+    Attack : 90 
     
     Mayat Hidup
-    HP : 
-    Def : 
-    Attack : 
+    HP : 150
+    Def : 20
+    Attack : 20 
 
     Penyihir
-    HP : 
-    Def : 
-    Attack : 
-    Spesial Effect : Ketika giliran Penyihir. Penyihir mampu Meregenerasi +35% dari Max HP-nya. 
+    HP : 250
+    Def : 40
+    Attack : 110
+    Spesial Effect : Ketika giliran Penyihir, dia akan berpeluang (Sebesar 40%) untuk meregenerasi HP-nya sendiri. Ketika terjadi, penyihir mampu meregenerasi +35% dari Max HP-nya. 
 
     Beruang Besar Cokelat
-    HP : 
-    Def : 
-    Attack : 
-    Spesial Effect : Setiap 
+    HP : 300
+    Def : 60
+    Attack : 90 
+    Spesial Effect : Setiap serangan Beruang Besar Cokelat akan berpeluang (40%) menghasilkan efek Bleed. Sebesar 25% dari ATKnya setelah 2 turn berikutnya. Tidak bisa di stack. 
 
     Raja Iblis v1
-    HP : 
-    Def : 
-    Attack : 
+    HP : 400
+    Def : 80
+    Attack : 120
+    Spesial Effect : Setiap serangan Raja Iblis akan berpeluang menghasilkan efek Burn. Sebesar 30% dari ATknya setelah 3 turn berikanya. Tidak bisa di stack. 
 
     Raja Iblis v2
-    HP : 
-    Def : 
-    Attack : 
+    HP : 280
+    Def : 100
+    Attack : 125
+    Spesial Effect : Setiap serangan Raja Iblis akan berpeluang menghasilkan efek Burn. Sebesar 30% dari ATknya setelah 4 turn berikanya. Tidak bisa di stack. 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -223,7 +247,7 @@ Item :
     +150% Defense.
 
     Liontin Hijau 
-    Ketika Jack berhasil melakuakn Dodge serangan akan merestorasi MAX 35% HPnya
+    Ketika Jack berhasil melakukan Dodge serangan akan merestorasi MAX 35% HPnya
 
     Rune Pahlawan 
     +50% Attack +50% Defense. 

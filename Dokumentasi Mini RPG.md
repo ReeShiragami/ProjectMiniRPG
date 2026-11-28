@@ -204,20 +204,20 @@ Build Character :
     Dodge. Jack akan mengdodge serangan dari lawan sebesar 90%. 
 
     Sang Penjaga
-    HP : 200 
+    HP : 150 
     Def : 60
-    Attack : 90 
+    Attack : 60
     
     Mayat Hidup
-    HP : 150
-    Def : 20
-    Attack : 20 
+    HP : 180
+    Def : 10
+    Attack : 35
 
     Penyihir
     HP : 250
     Def : 40
-    Attack : 110
-    Spesial Effect : Ketika giliran Penyihir, dia akan berpeluang (Sebesar 40%) untuk meregenerasi HP-nya sendiri. Ketika terjadi, penyihir mampu meregenerasi +35% dari Max HP-nya. 
+    Attack : 90
+    Spesial Effect : Ketika giliran Penyihir, dia akan berpeluang (Sebesar 40%) untuk meregenerasi HP-nya sendiri. Ketika terjadi, penyihir mampu meregenerasi +20% dari Max HP-nya. 
 
     Beruang Besar Cokelat
     HP : 300
@@ -244,13 +244,13 @@ Build Character :
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Item : 
     Zirah besi ringan. 
-    +150% Defense.
+    +60% Defense.
 
     Liontin Hijau 
-    Ketika Jack berhasil melakukan Dodge serangan akan merestorasi MAX 35% HPnya
+    Ketika Jack berhasil melakukan Dodge serangan akan merestorasi MAX 20% HPnya
 
     Rune Pahlawan 
-    +50% Attack +50% Defense. 
+    +25% Attack +25% Defense. 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     

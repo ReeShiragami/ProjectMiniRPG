@@ -181,12 +181,15 @@ rpg/
  │   └─ Skill (abstract) → SayaAkanLawan, SelfRegen
  ├─ effect/
  │   ├─ StatusEffect (abstract) → AtkBuff, Regen
- │   └─ DamageOverTime (abstract) → Burn, Bleed
+ │   ├─ DamageOverTime (abstract) → Burn, Bleed
+ │   ├─ Regen
+ │   └─ AtkBuff
  ├─ item/       Item (abstract) → ZirahBesiRingan, LiontinHijau, RunePahlawan
  ├─ ai/         EnemyBehavior (interface) → AlwaysAttack, RegenChance(0.4)
- ├─ battle/     Battle, DamageFormula (interface) → FlatSubtraction,
+ ├─ battle/     Battle, DamageFormula (interface) →  PercentageReduction
  │              ActionChooser, BattleLog, BalanceSimulator
  ├─ story/      Scene (interface) → DialogueScene, BattleScene, RewardScene, EndingScene
+ ├─ data/        PlayerFactory, EnemyFactory
  └─ Main.java
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -236,6 +239,16 @@ Build Character :
     Def : 100
     Attack : 125
     Spesial Effect : Setiap serangan Raja Iblis akan berpeluang menghasilkan efek Burn. Sebesar 30% dari ATknya setelah 4 turn berikanya. Tidak bisa di stack. 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Formula :
+Final Damage : Attack Lawan x Damage Reduction
+Final Damahe : Attack Lawan x 100 / 100 + def
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

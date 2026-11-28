@@ -1,3 +1,5 @@
+
+// Belum Done
 package model;
 
 public abstract class Character {
@@ -15,16 +17,11 @@ public abstract class Character {
         this.atk = atk;
 }
 
-public void takeDamage(int incomingDamage) {
+public int takeDamage(int incomingDamage) {
     double multiplier = 100.0 / (100.0 + this.def);
     int finalDamage = (int) Math.round(incomingDamage * multiplier);
-
-    this.hp -= finalDamage;
-    if(this.hp < 0){
-        this.hp = 0;
-    }
-
-    System.out.println(this.name + " terkena hit dengan damage sebesar : " + finalDamage + " damage!");
+    this.hp = Math.max(0, this.hp - finalDamage);
+    return finalDamage;
 }
 
 public void heal(int amount) {
